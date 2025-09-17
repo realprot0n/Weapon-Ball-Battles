@@ -6,10 +6,15 @@ func getRandomDirection() -> int:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	top_level = true
 	linear_velocity.x = 200 * getRandomDirection()
-	linear_velocity.y = 200
+	linear_velocity.y = -200
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	rotation_degrees += deg_to_rad(5)
+	
+
+func _onRemoveSelfTimerTimeout():
+	queue_free()

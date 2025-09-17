@@ -103,4 +103,3 @@ func _physics_process(delta):
 	if canSpinWeapon:
 		glaiveBase.rotate(deg_to_rad(delta*60*5))
 	_setEveryGlaivesPosition()
-
