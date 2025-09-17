@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bvlkl7m0h4183"
+path="res://.godot/imported/scythe poison tick.wav-0bbe23beac14143d67881402a3a0f2c3.sample"
+
+[deps]
+
+source_file="res://Sounds/scythe poison tick.wav"
+dest_files=["res://.godot/imported/scythe poison tick.wav-0bbe23beac14143d67881402a3a0f2c3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

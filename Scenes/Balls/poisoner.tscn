@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd54tqudmr0w0"]
+
+[ext_resource type="Script" path="res://Scripts/PoisonerScript.gd" id="1_btl5w"]
+[ext_resource type="AudioStream" uid="uid://bvlkl7m0h4183" path="res://Sounds/scythe poison tick.wav" id="2_a1vp1"]
+
+[node name="Poisoner" type="Node2D"]
+script = ExtResource("1_btl5w")
+
+[node name="PoisonTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="PoisonHitStream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_a1vp1")
+
+[node name="PoisonColorTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="PoisonTimer" to="." method="_onPoisonTimerTimeout"]

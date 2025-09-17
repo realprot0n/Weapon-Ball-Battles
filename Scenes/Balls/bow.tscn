@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://tcue8c81tb3j"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://cxvwtvdu0xq6j" path="res://Scenes/BallMaterial.tres" id="1_3udpq"]
+[ext_resource type="Script" path="res://Scripts/BowScript.gd" id="2_7uspb"]
+[ext_resource type="Texture2D" uid="uid://dv5gvj1jpuko6" path="res://Images/Bow.png" id="3_g2sgv"]
+[ext_resource type="PackedScene" uid="uid://ce48adkw0v6ok" path="res://Scenes/Balls/arrow.tscn" id="3_vw0gf"]
+[ext_resource type="Script" path="res://Scripts/BowCollision.gd" id="4_moph2"]
+[ext_resource type="Texture2D" uid="uid://prfri12ybhph" path="res://Images/ball.png" id="5_8g5n1"]
+[ext_resource type="Script" path="res://Scripts/Hurtbox.gd" id="6_m8s2x"]
+[ext_resource type="LabelSettings" uid="uid://knw365el3j1i" path="res://Scenes/TextLabelSettings.tres" id="7_y0v45"]
+[ext_resource type="PackedScene" uid="uid://7rn1b2tq5q05" path="res://Scenes/ball_pause_timer.tscn" id="9_37qql"]
+[ext_resource type="AudioStream" uid="uid://b2w1pery5ndj3" path="res://Sounds/Bow Shoot.wav" id="9_dtwyp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gew35"]
+radius = 23.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fm2k0"]
+radius = 64.0
+
+[node name="Bow" type="RigidBody2D" node_paths=PackedStringArray("healthDisplay", "hurtbox", "bowBase", "bowCollision", "arrowBase")]
+physics_material_override = ExtResource("1_3udpq")
+angular_damp = 100.0
+script = ExtResource("2_7uspb")
+healthDisplay = NodePath("HealthDisplay")
+hurtbox = NodePath("Hurtbox")
+bowBase = NodePath("BowBase")
+bowCollision = NodePath("BowBase/BowCollision")
+arrowScene = ExtResource("3_vw0gf")
+arrowBase = NodePath("Arrows")
+
+[node name="BowSpawnTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.996078, 1, 0, 1)
+scale = Vector2(0.19, 0.19)
+texture = ExtResource("5_8g5n1")
+
+[node name="BowBase" type="Node2D" parent="."]
+position = Vector2(0, -1.43051e-06)
+scale = Vector2(1.69087, 1.69087)
+
+[node name="Sprite2D" type="Sprite2D" parent="BowBase"]
+position = Vector2(0, -8.76702)
+rotation = -0.785398
+scale = Vector2(2.11715, 2.11715)
+texture = ExtResource("3_g2sgv")
+
+[node name="BowCollision" type="Area2D" parent="BowBase"]
+position = Vector2(-3.55271e-15, -13.9515)
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("4_moph2")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BowBase/BowCollision"]
+polygon = PackedVector2Array(-21, 5, -9, -7, 0, -8, 9, -7, 21, 5, 18, 8, -18, 8)
+
+[node name="Arrows" type="Node2D" parent="."]
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("6_m8s2x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_gew35")
+debug_color = Color(0.254708, 0.63485, 3.85046e-07, 0.42)
+
+[node name="PhysicsShape" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(0.333, 0.333)
+shape = SubResource("CircleShape2D_fm2k0")
+
+[node name="HealthDisplay" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 11.0
+label_settings = ExtResource("7_y0v45")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BowShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_dtwyp")
+
+[node name="BallPauseTimer" parent="." instance=ExtResource("9_37qql")]
+
+[connection signal="timeout" from="BowSpawnTimer" to="." method="_onBowSpawnTimerTimeout"]
+[connection signal="timeout" from="BallPauseTimer" to="." method="_onPauseTimerTimeout"]

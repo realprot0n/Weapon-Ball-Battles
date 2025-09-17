@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://rhwyxtx5n7lx"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://cxvwtvdu0xq6j" path="res://Scenes/BallMaterial.tres" id="1_kd5tp"]
+[ext_resource type="Script" path="res://Scripts/GlaiveLordScript.gd" id="2_qv04i"]
+[ext_resource type="Texture2D" uid="uid://prfri12ybhph" path="res://Images/ball.png" id="3_l81h6"]
+[ext_resource type="Script" path="res://Scripts/Hurtbox.gd" id="4_d2vlh"]
+[ext_resource type="AudioStream" uid="uid://c5jue0mbp7i0u" path="res://Sounds/GlaiveProjHit.wav" id="5_4u03l"]
+[ext_resource type="AudioStream" uid="uid://do8qbbs7na3vt" path="res://Sounds/GlaiveLordReady.wav" id="7_jkagm"]
+[ext_resource type="PackedScene" uid="uid://7rn1b2tq5q05" path="res://Scenes/ball_pause_timer.tscn" id="7_sn0cp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gew35"]
+radius = 23.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fm2k0"]
+radius = 64.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_xafde"]
+
+[node name="Glaive Lord" type="RigidBody2D"]
+physics_material_override = ExtResource("1_kd5tp")
+angular_damp = 100.0
+script = ExtResource("2_qv04i")
+
+[node name="GlaiveBase" type="Node2D" parent="."]
+scale = Vector2(1.54302, 1.54302)
+
+[node name="DeadGlaives" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.215459, 0.00318938, 0.330847, 1)
+scale = Vector2(0.19, 0.19)
+texture = ExtResource("3_l81h6")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("4_d2vlh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_gew35")
+debug_color = Color(0.254708, 0.63485, 3.85046e-07, 0.42)
+
+[node name="PhysicsShape" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(0.333, 0.333)
+shape = SubResource("CircleShape2D_fm2k0")
+
+[node name="HealthDisplay" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 11.0
+label_settings = SubResource("LabelSettings_xafde")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="GlaiveHitSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_4u03l")
+max_polyphony = 5
+
+[node name="BallPauseTimer" parent="." instance=ExtResource("7_sn0cp")]
+
+[node name="GlaiveSpawningTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="GlaiveReadySoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_jkagm")
+max_polyphony = 5
+
+[connection signal="timeout" from="BallPauseTimer" to="." method="_onPauseTimerTimeout"]

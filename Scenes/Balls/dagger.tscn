@@ -1,0 +1,90 @@
+[gd_scene load_steps=14 format=3 uid="uid://b4c7fqbcb2mld"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://cxvwtvdu0xq6j" path="res://Scenes/BallMaterial.tres" id="1_28qhx"]
+[ext_resource type="Script" path="res://Scripts/DaggerScript.gd" id="2_kbmr7"]
+[ext_resource type="Script" path="res://Scripts/DaggerCollision.gd" id="3_6ry4r"]
+[ext_resource type="Texture2D" uid="uid://clydhjl6vlidn" path="res://Images/Dagger.png" id="4_b8h23"]
+[ext_resource type="Texture2D" uid="uid://prfri12ybhph" path="res://Images/ball.png" id="5_c6upb"]
+[ext_resource type="Script" path="res://Scripts/Hurtbox.gd" id="6_iwtee"]
+[ext_resource type="LabelSettings" uid="uid://knw365el3j1i" path="res://Scenes/TextLabelSettings.tres" id="7_otu6l"]
+[ext_resource type="AudioStream" uid="uid://cu24sc6t18p1x" path="res://Sounds/Dagger Hit.wav" id="8_tmka3"]
+[ext_resource type="PackedScene" uid="uid://7rn1b2tq5q05" path="res://Scenes/ball_pause_timer.tscn" id="9_4k3ug"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fyn4d"]
+radius = 3.2404
+height = 21.0879
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tvlq"]
+size = Vector2(11.6654, 3.88848)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gew35"]
+radius = 23.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fm2k0"]
+radius = 64.0
+
+[node name="Dagger" type="RigidBody2D"]
+physics_material_override = ExtResource("1_28qhx")
+angular_damp = 100.0
+script = ExtResource("2_kbmr7")
+
+[node name="DaggerBase" type="Node2D" parent="."]
+scale = Vector2(1.54302, 1.54302)
+
+[node name="Sprite2D" type="Sprite2D" parent="DaggerBase"]
+position = Vector2(1.48232e-06, -21.6852)
+rotation = -0.785398
+scale = Vector2(1.2238, 1.20358)
+texture = ExtResource("4_b8h23")
+
+[node name="DaggerCollision" type="Area2D" parent="DaggerBase"]
+position = Vector2(-0.173367, -33.3926)
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("3_6ry4r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DaggerBase/DaggerCollision"]
+position = Vector2(0.173367, 11.3579)
+scale = Vector2(1, 1.0449)
+shape = SubResource("CapsuleShape2D_fyn4d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DaggerBase/DaggerCollision"]
+position = Vector2(0.173367, 15.2464)
+shape = SubResource("RectangleShape2D_0tvlq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.0588235, 1, 0.054902, 1)
+scale = Vector2(0.19, 0.19)
+texture = ExtResource("5_c6upb")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("6_iwtee")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_gew35")
+debug_color = Color(0.254708, 0.63485, 3.85046e-07, 0.42)
+
+[node name="PhysicsShape" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(0.333, 0.333)
+shape = SubResource("CircleShape2D_fm2k0")
+
+[node name="HealthDisplay" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 11.0
+label_settings = ExtResource("7_otu6l")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="DaggerAudioStream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_tmka3")
+max_polyphony = 10
+
+[node name="BallPauseTimer" parent="." instance=ExtResource("9_4k3ug")]
+
+[connection signal="timeout" from="BallPauseTimer" to="." method="_onPauseTimerTimeout"]

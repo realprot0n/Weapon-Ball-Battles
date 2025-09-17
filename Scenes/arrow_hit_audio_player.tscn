@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctmlu3gthyvec"]
+
+[ext_resource type="AudioStream" uid="uid://bh4psmw2fg7f2" path="res://Sounds/Bow Hit.wav" id="1_i663q"]
+
+[node name="ArrowHitAudioPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_i663q")

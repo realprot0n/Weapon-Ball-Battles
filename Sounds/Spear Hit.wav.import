@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dp8aixtna2580"
+path="res://.godot/imported/Spear Hit.wav-97daee5c70234c15403a6a2f36f140de.sample"
+
+[deps]
+
+source_file="res://Sounds/Spear Hit.wav"
+dest_files=["res://.godot/imported/Spear Hit.wav-97daee5c70234c15403a6a2f36f140de.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

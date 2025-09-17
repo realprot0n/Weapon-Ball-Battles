@@ -1,0 +1,97 @@
+[gd_scene load_steps=14 format=3 uid="uid://cgapbks8qagxr"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://cxvwtvdu0xq6j" path="res://Scenes/BallMaterial.tres" id="1_tkn6b"]
+[ext_resource type="Script" path="res://Scripts/ScytheScript.gd" id="2_ksk5y"]
+[ext_resource type="Texture2D" uid="uid://bx85yximc00nc" path="res://Images/scythe_silver.png" id="3_e45mi"]
+[ext_resource type="Script" path="res://Scripts/ScytheCollision.gd" id="4_8kvfw"]
+[ext_resource type="Texture2D" uid="uid://prfri12ybhph" path="res://Images/ball.png" id="5_n81jx"]
+[ext_resource type="PackedScene" uid="uid://cd54tqudmr0w0" path="res://Scenes/Balls/poisoner.tscn" id="5_ymk3m"]
+[ext_resource type="Script" path="res://Scripts/Hurtbox.gd" id="6_31lrt"]
+[ext_resource type="LabelSettings" uid="uid://knw365el3j1i" path="res://Scenes/TextLabelSettings.tres" id="7_ytc2c"]
+[ext_resource type="PackedScene" uid="uid://7rn1b2tq5q05" path="res://Scenes/ball_pause_timer.tscn" id="9_5v4fb"]
+[ext_resource type="AudioStream" uid="uid://dba8i1kcder1o" path="res://Sounds/scythe hit.wav" id="9_22qjf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fyn4d"]
+radius = 4.53656
+height = 28.5306
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gew35"]
+radius = 23.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fm2k0"]
+radius = 64.0
+
+[node name="Scythe" type="RigidBody2D" node_paths=PackedStringArray("healthDisplay", "hurtbox", "scytheBase", "scytheCollision", "poisonsBase")]
+physics_material_override = ExtResource("1_tkn6b")
+angular_damp = 100.0
+script = ExtResource("2_ksk5y")
+healthDisplay = NodePath("HealthDisplay")
+hurtbox = NodePath("Hurtbox")
+scytheBase = NodePath("ScytheBase")
+scytheCollision = NodePath("ScytheBase/ScytheCollision")
+poisonsBase = NodePath("Poisons")
+
+[node name="ScytheBase" type="Node2D" parent="."]
+scale = Vector2(1.54302, 1.54302)
+
+[node name="Sprite2D" type="Sprite2D" parent="ScytheBase"]
+position = Vector2(-2.59232, -27.8674)
+rotation = -0.785398
+scale = Vector2(2.16071, 2.125)
+texture = ExtResource("3_e45mi")
+
+[node name="ScytheCollision" type="Area2D" parent="ScytheBase" node_paths=PackedStringArray("scythe", "scytheBase")]
+position = Vector2(-0.173367, -33.3926)
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("4_8kvfw")
+scythe = NodePath("../..")
+scytheBase = NodePath("..")
+poisonScene = ExtResource("5_ymk3m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScytheBase/ScytheCollision"]
+position = Vector2(0.173367, 6.17325)
+scale = Vector2(1, 1.0449)
+shape = SubResource("CapsuleShape2D_fyn4d")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ScytheBase/ScytheCollision"]
+polygon = PackedVector2Array(4.70993, -8.0845, -5.65935, -8.0845, -9.54783, -6.78835, -16.0286, -0.307545, -17.3248, 3.58093, -17.3248, 6.82133, -16.0286, 8.76557, -7.60359, 0.988613, -3.06703, -0.307545)
+
+[node name="Poisons" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.647059, 0.266667, 0.968627, 1)
+scale = Vector2(0.19, 0.19)
+texture = ExtResource("5_n81jx")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("6_31lrt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_gew35")
+debug_color = Color(0.254708, 0.63485, 3.85046e-07, 0.42)
+
+[node name="PhysicsShape" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(0.333, 0.333)
+shape = SubResource("CircleShape2D_fm2k0")
+
+[node name="HealthDisplay" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 11.0
+label_settings = ExtResource("7_ytc2c")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ScytheAudioStream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_22qjf")
+max_polyphony = 3
+
+[node name="BallPauseTimer" parent="." instance=ExtResource("9_5v4fb")]
+
+[connection signal="timeout" from="BallPauseTimer" to="." method="_onPauseTimerTimeout"]

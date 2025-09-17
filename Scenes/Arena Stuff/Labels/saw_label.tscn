@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://pnycsuabksd5"]
+
+[ext_resource type="Script" path="res://Scripts/SawLabelScript.gd" id="1_ud18b"]
+
+[node name="SawLabel" type="Label"]
+self_modulate = Color(1, 0.439216, 0.533333, 1)
+texture_filter = 2
+offset_left = 378.0
+offset_top = 405.0
+offset_right = 418.0
+offset_bottom = 428.0
+scale = Vector2(2, 2)
+script = ExtResource("1_ud18b")

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://d06ae6gbtp63v"]
+
+[ext_resource type="Script" path="res://Scripts/GlaiveLordLabel.gd" id="1_htof8"]
+
+[node name="GlaiveLordLabel" type="Label"]
+self_modulate = Color(0.215686, 0.00392157, 0.329412, 1)
+texture_filter = 2
+offset_left = 548.0
+offset_top = 402.0
+offset_right = 588.0
+offset_bottom = 425.0
+scale = Vector2(2, 2)
+script = ExtResource("1_htof8")

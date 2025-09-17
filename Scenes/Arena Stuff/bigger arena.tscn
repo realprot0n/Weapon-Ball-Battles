@@ -1,0 +1,181 @@
+[gd_scene load_steps=18 format=3 uid="uid://t363lv8jw5ju"]
+
+[ext_resource type="Script" path="res://Scripts/biggerArenaStuff.gd" id="1_6wn8p"]
+[ext_resource type="Script" path="res://Scripts/BounceDetectorScript.gd" id="2_j1vo6"]
+[ext_resource type="AudioStream" uid="uid://d3nkse1wm7756" path="res://Sounds/Bounce.wav" id="3_jssqb"]
+[ext_resource type="PackedScene" uid="uid://pnycsuabksd5" path="res://Scenes/Arena Stuff/Labels/saw_label.tscn" id="4_30kqf"]
+[ext_resource type="PackedScene" uid="uid://0bjgy3yq6ogi" path="res://Scenes/Arena Stuff/Labels/spear_label.tscn" id="5_xa2qs"]
+[ext_resource type="PackedScene" uid="uid://l7lndqgn782c" path="res://Scenes/Balls/Spear.tscn" id="6_t6cs0"]
+[ext_resource type="PackedScene" uid="uid://6wdvh06761rp" path="res://Scenes/Balls/saw.tscn" id="7_hauag"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rw8qd"]
+size = Vector2(719.344, 225.248)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1rir"]
+size = Vector2(717, 238)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ot85w"]
+size = Vector2(220, 701)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jxkn2"]
+size = Vector2(229, 710.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nusio"]
+size = Vector2(10.5924, 10.5924)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aiprm"]
+size = Vector2(362, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oa3bk"]
+size = Vector2(362, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sncsj"]
+size = Vector2(23.5, 340)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cuij5"]
+size = Vector2(24.5, 339)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k32dh"]
+size = Vector2(23.5, 340)
+
+[node name="TestArena" type="Node2D"]
+script = ExtResource("1_6wn8p")
+
+[node name="ArenaStuff" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="ArenaStuff"]
+offset_left = -323.0
+offset_top = -316.0
+offset_right = 1083.0
+offset_bottom = 670.0
+scale = Vector2(1.26475, 1.70678)
+metadata/_edit_use_anchors_ = true
+
+[node name="RigidBody2D" type="RigidBody2D" parent="ArenaStuff"]
+position = Vector2(-611, -710)
+scale = Vector2(3.37609, 3.37609)
+gravity_scale = 0.0
+freeze = true
+
+[node name="Floor" type="CollisionShape2D" parent="ArenaStuff/RigidBody2D"]
+position = Vector2(359.672, 597.957)
+shape = SubResource("RectangleShape2D_rw8qd")
+
+[node name="Ceiling" type="CollisionShape2D" parent="ArenaStuff/RigidBody2D"]
+position = Vector2(362.5, 117.333)
+shape = SubResource("RectangleShape2D_m1rir")
+
+[node name="Left Wall" type="CollisionShape2D" parent="ArenaStuff/RigidBody2D"]
+position = Vector2(112, 348.333)
+shape = SubResource("RectangleShape2D_ot85w")
+
+[node name="Right Wall" type="CollisionShape2D" parent="ArenaStuff/RigidBody2D"]
+position = Vector2(605.5, 353.583)
+shape = SubResource("RectangleShape2D_jxkn2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaStuff/RigidBody2D"]
+position = Vector2(261.545, 446.078)
+scale = Vector2(7.42809, 7.42809)
+shape = SubResource("RectangleShape2D_nusio")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ArenaStuff/RigidBody2D"]
+position = Vector2(451.706, 446.078)
+scale = Vector2(7.42809, 7.42809)
+shape = SubResource("RectangleShape2D_nusio")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ArenaStuff/RigidBody2D"]
+position = Vector2(261.249, 275.763)
+scale = Vector2(7.42809, 7.42809)
+shape = SubResource("RectangleShape2D_nusio")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="ArenaStuff/RigidBody2D"]
+position = Vector2(451.706, 275.763)
+scale = Vector2(7.42809, 7.42809)
+shape = SubResource("RectangleShape2D_nusio")
+
+[node name="BounceDetector" type="Area2D" parent="ArenaStuff"]
+visible = false
+position = Vector2(117, 59)
+scale = Vector2(2.78712, 2.7739)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("2_j1vo6")
+
+[node name="Floor" type="CollisionShape2D" parent="ArenaStuff/BounceDetector"]
+position = Vector2(171, 2)
+shape = SubResource("RectangleShape2D_aiprm")
+debug_color = Color(0.14609, 0.645575, 3.85046e-07, 0.42)
+
+[node name="Ceiling" type="CollisionShape2D" parent="ArenaStuff/BounceDetector"]
+position = Vector2(170, 320.5)
+shape = SubResource("RectangleShape2D_oa3bk")
+debug_color = Color(0.14609, 0.645575, 3.85046e-07, 0.42)
+
+[node name="Left Wall" type="CollisionShape2D" parent="ArenaStuff/BounceDetector"]
+position = Vector2(-0.75, 157)
+shape = SubResource("RectangleShape2D_sncsj")
+debug_color = Color(0.14609, 0.645575, 3.85046e-07, 0.42)
+
+[node name="Right Wall" type="CollisionShape2D" parent="ArenaStuff/BounceDetector"]
+position = Vector2(341.25, 156)
+shape = SubResource("RectangleShape2D_cuij5")
+debug_color = Color(0.14609, 0.645575, 3.85046e-07, 0.42)
+
+[node name="Left Wall2" type="CollisionShape2D" parent="ArenaStuff/BounceDetector"]
+position = Vector2(52.7427, 56.2385)
+scale = Vector2(4.51413, 0.317361)
+shape = SubResource("RectangleShape2D_k32dh")
+debug_color = Color(0.14609, 0.645575, 3.85046e-07, 0.42)
+
+[node name="Left Wall3" type="CollisionShape2D" parent="ArenaStuff/BounceDetector"]
+position = Vector2(286.676, 55.5175)
+scale = Vector2(4.51413, 0.317361)
+shape = SubResource("RectangleShape2D_k32dh")
+debug_color = Color(0.14609, 0.645575, 3.85046e-07, 0.42)
+
+[node name="Left Wall4" type="CollisionShape2D" parent="ArenaStuff/BounceDetector"]
+position = Vector2(53.4603, 269.296)
+scale = Vector2(4.51413, 0.317361)
+shape = SubResource("RectangleShape2D_k32dh")
+debug_color = Color(0.14609, 0.645575, 3.85046e-07, 0.42)
+
+[node name="Left Wall5" type="CollisionShape2D" parent="ArenaStuff/BounceDetector"]
+position = Vector2(285.959, 268.575)
+scale = Vector2(4.51413, 0.317361)
+shape = SubResource("RectangleShape2D_k32dh")
+debug_color = Color(0.14609, 0.645575, 3.85046e-07, 0.42)
+
+[node name="BouncePlayer" type="AudioStreamPlayer2D" parent="ArenaStuff/BounceDetector"]
+stream = ExtResource("3_jssqb")
+max_polyphony = 10
+
+[node name="ArenaOutline" type="Line2D" parent="ArenaStuff"]
+position = Vector2(-304, -142)
+scale = Vector2(1.22873, 1.22873)
+points = PackedVector2Array(356.466, 402.855, 576.205, 402.855, 576.205, 187.185, 883.026, 187.185, 883.026, 403.669, 1099.51, 402.855, 1099.51, 655.148, 883.839, 655.148, 883.839, 871.632, 577.019, 871.632, 577.019, 655.148, 360.535, 655.148, 360.535, 397.972)
+default_color = Color(0, 0, 0, 1)
+
+[node name="SawLabel" parent="ArenaStuff" instance=ExtResource("4_30kqf")]
+offset_left = 160.0
+offset_top = 680.0
+offset_right = 200.0
+offset_bottom = 703.0
+metadata/_edit_use_anchors_ = true
+
+[node name="SpearLabel" parent="ArenaStuff" instance=ExtResource("5_xa2qs")]
+offset_left = 806.0
+offset_top = 684.0
+offset_right = 887.0
+offset_bottom = 710.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(588, 515)
+
+[node name="spear" parent="." instance=ExtResource("6_t6cs0")]
+position = Vector2(743, 497)
+starting_health = 500
+
+[node name="Saw" parent="." instance=ExtResource("7_hauag")]
+position = Vector2(422, 480)
+starting_health = 500

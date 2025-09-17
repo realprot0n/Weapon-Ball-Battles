@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://l7lndqgn782c"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://cxvwtvdu0xq6j" path="res://Scenes/BallMaterial.tres" id="1_6lbpq"]
+[ext_resource type="Script" path="res://Scripts/SpearScript.gd" id="2_55bsq"]
+[ext_resource type="Texture2D" uid="uid://bao6v2ttu2jw3" path="res://Images/Spear.png" id="3_aj8i5"]
+[ext_resource type="Script" path="res://Scripts/SpearCollision.gd" id="4_4irqm"]
+[ext_resource type="Texture2D" uid="uid://prfri12ybhph" path="res://Images/ball.png" id="5_4hhcm"]
+[ext_resource type="Script" path="res://Scripts/Hurtbox.gd" id="6_qeti2"]
+[ext_resource type="LabelSettings" uid="uid://knw365el3j1i" path="res://Scenes/TextLabelSettings.tres" id="7_np72g"]
+[ext_resource type="AudioStream" uid="uid://dp8aixtna2580" path="res://Sounds/Spear Hit.wav" id="8_if844"]
+[ext_resource type="PackedScene" uid="uid://7rn1b2tq5q05" path="res://Scenes/ball_pause_timer.tscn" id="9_fyotp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fyn4d"]
+radius = 3.88848
+height = 23.5688
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gew35"]
+radius = 23.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fm2k0"]
+radius = 64.0
+
+[node name="spear" type="RigidBody2D"]
+physics_material_override = ExtResource("1_6lbpq")
+angular_damp = 100.0
+script = ExtResource("2_55bsq")
+
+[node name="SpearSpinningBase" type="Node2D" parent="."]
+
+[node name="SpearScalingBase" type="Node2D" parent="SpearSpinningBase"]
+position = Vector2(0, -21)
+scale = Vector2(1.54302, 1.54302)
+
+[node name="Sprite2D" type="Sprite2D" parent="SpearSpinningBase/SpearScalingBase"]
+position = Vector2(-1.51678e-06, -18.419)
+rotation = -0.785398
+scale = Vector2(2.28261, 2.2449)
+texture = ExtResource("3_aj8i5")
+
+[node name="SpearCollision" type="Area2D" parent="SpearSpinningBase/SpearScalingBase"]
+position = Vector2(-0.173367, -20.0557)
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("4_4irqm")
+
+[node name="Stick" type="CollisionShape2D" parent="SpearSpinningBase/SpearScalingBase/SpearCollision"]
+position = Vector2(0.821447, 9.03831)
+scale = Vector2(1, 1.0449)
+shape = SubResource("CapsuleShape2D_fyn4d")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpearSpinningBase/SpearScalingBase/SpearCollision"]
+position = Vector2(0.173367, -2.62713)
+polygon = PackedVector2Array(-8, 0, 0, -17, 8, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.0980392, 1, 0.976471, 1)
+scale = Vector2(0.19, 0.19)
+texture = ExtResource("5_4hhcm")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("6_qeti2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_gew35")
+debug_color = Color(0.254708, 0.63485, 3.85046e-07, 0.42)
+
+[node name="PhysicsShape" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(0.333, 0.333)
+shape = SubResource("CircleShape2D_fm2k0")
+
+[node name="HealthDisplay" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 11.0
+label_settings = ExtResource("7_np72g")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="SpearAudioStream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_if844")
+max_polyphony = 10
+
+[node name="BallPauseTimer" parent="." instance=ExtResource("9_fyotp")]
+
+[connection signal="timeout" from="BallPauseTimer" to="." method="_onPauseTimerTimeout"]
