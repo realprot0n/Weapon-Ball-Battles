@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://bf4josmsegvbe"]
 
-[ext_resource type="Script" uid="uid://xe3st2nqvweh" path="res://Scripts/ArenaScript.gd" id="1_0frtu"]
-[ext_resource type="Script" uid="uid://xol3h5bqthki" path="res://Scripts/BounceDetectorScript.gd" id="2_f40ab"]
+[ext_resource type="Script" path="res://Scripts/ArenaScript.gd" id="1_0frtu"]
+[ext_resource type="Script" path="res://Scripts/BounceDetectorScript.gd" id="2_f40ab"]
 [ext_resource type="AudioStream" uid="uid://d3nkse1wm7756" path="res://Sounds/Bounce.wav" id="3_wxowa"]
 [ext_resource type="PackedScene" uid="uid://d06ae6gbtp63v" path="res://Scenes/Arena Stuff/Labels/glaive_lord_label.tscn" id="5_itpdh"]
 [ext_resource type="PackedScene" uid="uid://cqi3hoanqhhdf" path="res://Scenes/Arena Stuff/Labels/bow_label.tscn" id="5_k3xsh"]
