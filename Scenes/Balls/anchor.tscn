@@ -33,7 +33,7 @@ hurtbox = NodePath("Hurtbox")
 anchorBase = NodePath("AnchorBase")
 anchorCollision = NodePath("AnchorBase/AnchorCollision")
 
-[node name="Node" type="Node" parent="."]
+[node name="SlammingAnchors" type="Node" parent="."]
 
 [node name="AnchorBase" type="Node2D" parent="."]
 scale = Vector2(1.73037, 1.73037)
