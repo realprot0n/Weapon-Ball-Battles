@@ -7,3 +7,10 @@ var slammingBall: RigidBody2D
 
 func ready() -> void:
 	top_level = true
+
+
+func _physics_process(delta: float) -> void:
+	if slammingBall == null:
+		return
+	
+	slammingBall.apply_force(Vector2(0, -weightMultiplier*weightLevel*delta))
