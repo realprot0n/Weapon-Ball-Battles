@@ -12,7 +12,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fyn4d"]
 radius = 4.53656
-height = 28.5306
+height = 40.9353
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gew35"]
 radius = 23.0

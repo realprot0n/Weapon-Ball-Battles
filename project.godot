@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Weapon Ball Battles"
 run/main_scene="res://Scenes/Arena Stuff/test_arena.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -25,11 +25,15 @@ ArrowHitAudioPlayer="*res://Scenes/arrow_hit_audio_player.tscn"
 
 settings/crash_handler/message="Please include this when reporting the bug to the project developer (@whadthefuck on discord)"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/export_resources/plugin.cfg")
+
 [input]
 
 Reload={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"location":0,"echo":false,"script":null)
 ]
 }
 

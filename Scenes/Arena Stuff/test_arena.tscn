@@ -108,9 +108,9 @@ offset_right = 426.0
 
 [node name="BowLabel" parent="ArenaStuff" instance=ExtResource("5_k3xsh")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="ArenaStuff"]
 position = Vector2(554, 267)
-zoom = Vector2(1.25, 1.25)
+zoom = Vector2(1.75, 1.75)
 
 [node name="Glaive Lord" parent="." instance=ExtResource("7_v5nn3")]
 position = Vector2(444, 195)

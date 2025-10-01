@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ds3yneeoi2vus"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://cxvwtvdu0xq6j" path="res://Scenes/BallMaterial.tres" id="1_cjvo7"]
-[ext_resource type="Script" path="res://UsedGlaiveScript.gd" id="1_t1d2m"]
+[ext_resource type="Script" path="res://Scripts/UsedGlaiveScript.gd" id="1_t1d2m"]
 [ext_resource type="Texture2D" uid="uid://dumxtxqoa8uya" path="res://Images/glaives 0p.png" id="2_avxw8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1gvbm"]

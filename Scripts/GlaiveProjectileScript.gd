@@ -55,7 +55,6 @@ func onDie():
 	usedGlaive.position = global_position
 	owner.owner.add_child(usedGlaive)
 	usedGlaive.owner = owner.owner
-	print(usedGlaive.owner)
 	queue_free()
 	
 

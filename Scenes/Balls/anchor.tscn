@@ -1,0 +1,105 @@
+[gd_scene load_steps=14 format=3 uid="uid://cny1c715u0l4i"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://cxvwtvdu0xq6j" path="res://Scenes/BallMaterial.tres" id="1_ixhdp"]
+[ext_resource type="Script" uid="uid://5rpy7s1ofg0o" path="res://Scripts/AnchorScript.gd" id="2_fkhxt"]
+[ext_resource type="Texture2D" uid="uid://c7682b1hsn7p7" path="res://Images/anchor.png" id="3_4mgmi"]
+[ext_resource type="Script" uid="uid://drhuux1mmxfxw" path="res://Scripts/AnchorCollision.gd" id="4_mr13i"]
+[ext_resource type="Texture2D" uid="uid://prfri12ybhph" path="res://Images/ball.png" id="5_m8gjo"]
+[ext_resource type="Script" uid="uid://d234l2cummdkr" path="res://Scripts/Hurtbox.gd" id="6_o5745"]
+[ext_resource type="LabelSettings" uid="uid://knw365el3j1i" path="res://Scenes/TextLabelSettings.tres" id="7_atthu"]
+[ext_resource type="AudioStream" uid="uid://bgm6uhlfdq8qc" path="res://Sounds/Sword Hit.wav" id="8_0lkir"]
+[ext_resource type="PackedScene" uid="uid://7rn1b2tq5q05" path="res://Scenes/ball_pause_timer.tscn" id="9_f5c18"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fyn4d"]
+radius = 4.53656
+height = 40.9353
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0bbv4"]
+radius = 4.04538
+height = 24.2723
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gew35"]
+radius = 23.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fm2k0"]
+radius = 64.0
+
+[node name="Anchor" type="RigidBody2D" node_paths=PackedStringArray("healthDisplay", "hurtbox", "anchorBase", "anchorCollision")]
+physics_material_override = ExtResource("1_ixhdp")
+angular_damp = 100.0
+script = ExtResource("2_fkhxt")
+healthDisplay = NodePath("HealthDisplay")
+hurtbox = NodePath("Hurtbox")
+anchorBase = NodePath("AnchorBase")
+anchorCollision = NodePath("AnchorBase/AnchorCollision")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="AnchorBase" type="Node2D" parent="."]
+scale = Vector2(1.73037, 1.73037)
+
+[node name="Sprite2D" type="Sprite2D" parent="AnchorBase"]
+position = Vector2(-1.31227e-06, -32.3917)
+rotation = 2.35619
+scale = Vector2(2.16071, 2.125)
+texture = ExtResource("3_4mgmi")
+
+[node name="AnchorCollision" type="Area2D" parent="AnchorBase"]
+position = Vector2(-0.173367, -28.8438)
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("4_mr13i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnchorBase/AnchorCollision"]
+position = Vector2(0.173367, -5.25302)
+scale = Vector2(1, 1.0449)
+shape = SubResource("CapsuleShape2D_fyn4d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="AnchorBase/AnchorCollision"]
+position = Vector2(0.173367, 9.19477)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_0bbv4")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AnchorBase/AnchorCollision"]
+polygon = PackedVector2Array(-11.9628, 2.83774, -16.5861, -1.78555, -16.0082, -8.14258, -14.8523, -12.7659, -9.07322, -18.545, -2.71619, -21.4345, 3.64084, -21.4345, 9.41995, -18.545, 15.777, -12.7659, 16.9328, -8.14258, 16.9328, -1.78555, 12.3095, 2.25983, 9.41995, -0.629726, 9.41995, -6.40884, 4.79666, -11.0321, -4.44993, -11.0321, -8.49531, -6.40884, -8.49531, -0.629726)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.117647, 0.160784, 0.611765, 1)
+scale = Vector2(0.19, 0.19)
+texture = ExtResource("5_m8gjo")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("6_o5745")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_gew35")
+debug_color = Color(0.254708, 0.63485, 3.85046e-07, 0.42)
+
+[node name="PhysicsShape" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(0.333, 0.333)
+shape = SubResource("CircleShape2D_fm2k0")
+
+[node name="HealthDisplay" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 11.0
+label_settings = ExtResource("7_atthu")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AnchorHitStream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_0lkir")
+max_polyphony = 3
+
+[node name="AnchorSlamStream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_0lkir")
+max_polyphony = 3
+
+[node name="BallPauseTimer" parent="." instance=ExtResource("9_f5c18")]
+
+[connection signal="timeout" from="BallPauseTimer" to="." method="_onPauseTimerTimeout"]
