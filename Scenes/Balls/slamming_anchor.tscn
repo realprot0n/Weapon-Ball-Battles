@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmu6wxrnxf10f"]
+
+[ext_resource type="Script" uid="uid://dpkqu1riw84i0" path="res://SlammingAnchorScript.gd" id="1_n6ceu"]
+
+[node name="SlammingAnchor" type="Node2D"]
+script = ExtResource("1_n6ceu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
