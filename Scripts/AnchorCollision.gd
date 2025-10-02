@@ -32,7 +32,6 @@ func _on_hit_hurtbox(area: Hurtbox):
 	print(slammingAnchorToAdd)
 	slammingAnchorToAdd.weightLevel = ball.anchorWeight
 	slammingAnchorToAdd.slammingBall = area.owner
-	slammingAnchorToAdd.owner = slammingAnchorBase
 	slammingAnchorBase.add_child(slammingAnchorToAdd)
 	
 	ball.anchorWeight += 1
@@ -59,11 +58,16 @@ func _on_hit_hitbox(area: WeaponHitbox) -> void:
 
 
 func _ready():
+	damage = 0
+	
 	area_entered.connect(_on_hit_hitbox)
 	defaultSpriteScale = anchorBase.scale
 	super()
 
 func _physics_process(delta: float) -> void:
+	if ball.sleeping:
+		return
+	
 	rechargeTimer += delta
 	if not collisionsDisabled:
 		return

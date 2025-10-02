@@ -37,6 +37,7 @@ script = ExtResource("1_0frtu")
 [node name="ArenaStuff" type="Node2D" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="ArenaStuff"]
+z_index = -4096
 offset_left = -108.0
 offset_top = -120.0
 offset_right = 1298.0
