@@ -1,5 +1,5 @@
 extends RigidBody2D
-class_name Anchor
+class_name AnchorBall
 
 
 @export var starting_health: int = 100
@@ -10,6 +10,8 @@ var health: int = 0
 @export var anchorBase: Node2D
 @export var anchorCollision: AnchorHitbox
 var canSpinWeapon: bool = true
+
+var anchorWeight = 1
 
 func _onHurtboxHit(area: WeaponHitbox) -> void:
 	# replace when i make hitbox class

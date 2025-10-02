@@ -1,12 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://bf4josmsegvbe"]
+[gd_scene load_steps=15 format=3 uid="uid://bf4josmsegvbe"]
 
-[ext_resource type="Script" path="res://Scripts/ArenaScript.gd" id="1_0frtu"]
-[ext_resource type="Script" path="res://Scripts/BounceDetectorScript.gd" id="2_f40ab"]
+[ext_resource type="Script" uid="uid://xe3st2nqvweh" path="res://Scripts/ArenaScript.gd" id="1_0frtu"]
+[ext_resource type="Script" uid="uid://xol3h5bqthki" path="res://Scripts/BounceDetectorScript.gd" id="2_f40ab"]
 [ext_resource type="AudioStream" uid="uid://d3nkse1wm7756" path="res://Sounds/Bounce.wav" id="3_wxowa"]
-[ext_resource type="PackedScene" uid="uid://d06ae6gbtp63v" path="res://Scenes/Arena Stuff/Labels/glaive_lord_label.tscn" id="5_itpdh"]
 [ext_resource type="PackedScene" uid="uid://cqi3hoanqhhdf" path="res://Scenes/Arena Stuff/Labels/bow_label.tscn" id="5_k3xsh"]
+[ext_resource type="PackedScene" uid="uid://cny1c715u0l4i" path="res://Scenes/Balls/anchor.tscn" id="6_brkk4"]
 [ext_resource type="PackedScene" uid="uid://tcue8c81tb3j" path="res://Scenes/Balls/bow.tscn" id="7_amdip"]
-[ext_resource type="PackedScene" uid="uid://rhwyxtx5n7lx" path="res://Scenes/Balls/glaive_lord.tscn" id="7_v5nn3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw8qd"]
 size = Vector2(719.344, 225.248)
@@ -102,18 +101,14 @@ scale = Vector2(1.22873, 1.22873)
 points = PackedVector2Array(358, 187, 631, 187, 631, 438, 363, 438, 363, 182)
 default_color = Color(0, 0, 0, 1)
 
-[node name="GlaiveLordLabel" parent="ArenaStuff" instance=ExtResource("5_itpdh")]
-offset_left = 386.0
-offset_right = 426.0
-
 [node name="BowLabel" parent="ArenaStuff" instance=ExtResource("5_k3xsh")]
 
 [node name="Camera2D" type="Camera2D" parent="ArenaStuff"]
 position = Vector2(554, 267)
 zoom = Vector2(1.75, 1.75)
 
-[node name="Glaive Lord" parent="." instance=ExtResource("7_v5nn3")]
-position = Vector2(444, 195)
-
 [node name="Bow" parent="." instance=ExtResource("7_amdip")]
 position = Vector2(633, 195)
+
+[node name="Anchor" parent="." instance=ExtResource("6_brkk4")]
+position = Vector2(449, 187)

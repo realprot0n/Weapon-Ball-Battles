@@ -1,14 +1,40 @@
 extends WeaponHitbox
 class_name AnchorHitbox
 
+@onready var ball: AnchorBall = $"../.."
+@onready var anchorBase: Node2D = $".."
+@onready var slammingAnchorBase: Node
+
+@export var slammingAnchor: PackedScene
+@export var rechargeTime: float = 2
+var rechargeTimer: float
+var defaultSpriteScale: Vector2
+
+
+var collisionsDisabled = false
+func setCollisionEnabled(enabled: bool) -> void:
+	collisionsDisabled = not enabled
+	for child in get_children():
+		child.disabled = not enabled
+
 func _on_hit_hurtbox(area: Hurtbox):
 	if area == null:
 		return
 	if area.owner == owner.owner:
 		return
 	
-	print(damage)
-	damage += 1
+	ball.anchorWeight += 1
+	rechargeTimer = 0
+	anchorBase.scale = Vector2(0, 0)
+	setCollisionEnabled(false)
+	
+	var slammingAnchorToAdd = slammingAnchor.instantiate()
+	slammingAnchorToAdd.weightLevel = ball.anchorWeight
+	slammingAnchorToAdd.slammingBall = area.owner
+	slammingAnchorToAdd.owner = slammingAnchorBase
+	slammingAnchorToAdd.top_level = true
+	slammingAnchorToAdd.reparent(slammingAnchorBase)
+	
 	$"../../AnchorHitStream".play()
 	owner.start_pause_timer()
 	area.owner.start_pause_timer()
@@ -22,7 +48,7 @@ func flipWeapon() -> void:
 func _on_hit_hitbox(area: WeaponHitbox) -> void:
 	if area == null:
 		return
-	print("sword flip")
+	print("anchor flip")
 	
 	flipWeapon()
 	
@@ -33,4 +59,16 @@ func _on_hit_hitbox(area: WeaponHitbox) -> void:
 
 func _ready():
 	area_entered.connect(_on_hit_hitbox)
+	defaultSpriteScale = anchorBase.scale
 	super()
+
+func _physics_process(delta: float) -> void:
+	rechargeTimer += delta
+	if not collisionsDisabled:
+		return
+	
+	if rechargeTimer > rechargeTime:
+		setCollisionEnabled(true)
+		anchorBase.scale = defaultSpriteScale
+	elif rechargeTimer > rechargeTime/2:
+		anchorBase.scale = defaultSpriteScale - -defaultSpriteScale * (rechargeTimer-rechargeTime)/(rechargeTime/2)

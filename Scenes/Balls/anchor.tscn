@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cny1c715u0l4i"]
+[gd_scene load_steps=15 format=3 uid="uid://cny1c715u0l4i"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://cxvwtvdu0xq6j" path="res://Scenes/BallMaterial.tres" id="1_ixhdp"]
 [ext_resource type="Script" uid="uid://5rpy7s1ofg0o" path="res://Scripts/AnchorScript.gd" id="2_fkhxt"]
 [ext_resource type="Texture2D" uid="uid://c7682b1hsn7p7" path="res://Images/anchor.png" id="3_4mgmi"]
 [ext_resource type="Script" uid="uid://drhuux1mmxfxw" path="res://Scripts/AnchorCollision.gd" id="4_mr13i"]
 [ext_resource type="Texture2D" uid="uid://prfri12ybhph" path="res://Images/ball.png" id="5_m8gjo"]
+[ext_resource type="PackedScene" uid="uid://bmu6wxrnxf10f" path="res://Scenes/Balls/slamming_anchor.tscn" id="5_qpcmy"]
 [ext_resource type="Script" uid="uid://d234l2cummdkr" path="res://Scripts/Hurtbox.gd" id="6_o5745"]
 [ext_resource type="LabelSettings" uid="uid://knw365el3j1i" path="res://Scenes/TextLabelSettings.tres" id="7_atthu"]
 [ext_resource type="AudioStream" uid="uid://bgm6uhlfdq8qc" path="res://Sounds/Sword Hit.wav" id="8_0lkir"]
@@ -39,16 +40,18 @@ anchorCollision = NodePath("AnchorBase/AnchorCollision")
 scale = Vector2(1.73037, 1.73037)
 
 [node name="Sprite2D" type="Sprite2D" parent="AnchorBase"]
-position = Vector2(-1.31227e-06, -32.3917)
+position = Vector2(0.015324234, -0.069610596)
 rotation = 2.35619
-scale = Vector2(2.16071, 2.125)
+scale = Vector2(2.125, 2.125)
 texture = ExtResource("3_4mgmi")
+offset = Vector2(-10.750322, 10.760425)
 
 [node name="AnchorCollision" type="Area2D" parent="AnchorBase"]
 position = Vector2(-0.173367, -28.8438)
 collision_layer = 4
 collision_mask = 6
 script = ExtResource("4_mr13i")
+slammingAnchor = ExtResource("5_qpcmy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnchorBase/AnchorCollision"]
 position = Vector2(0.173367, -5.25302)
