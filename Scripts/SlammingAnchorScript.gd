@@ -5,7 +5,7 @@ class_name SlammingAnchor
 var weightLevel: float = 1
 var slammingBall: RigidBody2D
 
-func ready() -> void:
+func _ready() -> void:
 	print("asdf")
 	top_level = true
 
@@ -14,7 +14,6 @@ func _physics_process(delta: float) -> void:
 	if slammingBall == null:
 		return
 	
-	print(slammingBall.global_position)
-	
-	slammingBall.apply_force(Vector2(0, -weightMultiplier*weightLevel*delta))
+	slammingBall.apply_force(Vector2(0, -weightMultiplier*weightLevel))
 	position = slammingBall.global_position
+	

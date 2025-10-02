@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bmu6wxrnxf10f"]
 
-[ext_resource type="Script" uid="uid://dpkqu1riw84i0" path="res://SlammingAnchorScript.gd" id="1_n6ceu"]
+[ext_resource type="Script" uid="uid://dpkqu1riw84i0" path="res://Scripts/SlammingAnchorScript.gd" id="1_n6ceu"]
 [ext_resource type="Texture2D" uid="uid://c7682b1hsn7p7" path="res://Images/anchor.png" id="2_4qq05"]
 
 [node name="SlammingAnchor" type="Node2D"]
@@ -10,5 +10,5 @@ script = ExtResource("1_n6ceu")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -19)
 rotation = 2.3561945
-scale = Vector2(2.0944905, 2.0944905)
+scale = Vector2(3.676, 3.676)
 texture = ExtResource("2_4qq05")

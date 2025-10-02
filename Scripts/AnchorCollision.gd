@@ -3,7 +3,7 @@ class_name AnchorHitbox
 
 @onready var ball: AnchorBall = $"../.."
 @onready var anchorBase: Node2D = $".."
-@onready var slammingAnchorBase: Node
+@onready var slammingAnchorBase: Node = $"../../SlammingAnchors"
 
 @export var slammingAnchor: PackedScene
 @export var rechargeTime: float = 2
@@ -23,18 +23,19 @@ func _on_hit_hurtbox(area: Hurtbox):
 	if area.owner == owner.owner:
 		return
 	
-	ball.anchorWeight += 1
 	rechargeTimer = 0
 	anchorBase.scale = Vector2(0, 0)
 	setCollisionEnabled(false)
 	
+	print(slammingAnchor)
 	var slammingAnchorToAdd = slammingAnchor.instantiate()
+	print(slammingAnchorToAdd)
 	slammingAnchorToAdd.weightLevel = ball.anchorWeight
 	slammingAnchorToAdd.slammingBall = area.owner
 	slammingAnchorToAdd.owner = slammingAnchorBase
-	slammingAnchorToAdd.top_level = true
-	slammingAnchorToAdd.reparent(slammingAnchorBase)
+	slammingAnchorBase.add_child(slammingAnchorToAdd)
 	
+	ball.anchorWeight += 1
 	$"../../AnchorHitStream".play()
 	owner.start_pause_timer()
 	area.owner.start_pause_timer()

@@ -27,7 +27,7 @@ settings/crash_handler/message="Please include this when reporting the bug to th
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/export_resources/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 
