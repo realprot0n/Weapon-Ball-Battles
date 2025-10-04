@@ -1,9 +1,10 @@
 extends Node2D
 class_name SlammingAnchor
 
-@export var weightMultiplier: float = 200000
+@export var weightMultiplier: float = 2000
 var weightLevel: float = 1
 var slammingBall: RigidBody2D
+var slamPlayer: AudioStreamPlayer
 
 func _ready() -> void:
 	print("asdf")
@@ -21,8 +22,9 @@ func _physics_process(delta: float) -> void:
 	
 	if (sign(velocityLastFrame.y) == 1) and sign(slammingBall.linear_velocity.y) == -1:
 		slammingBall.health -= weightLevel
+		slamPlayer.play()
 		queue_free()
 	
 	velocityLastFrame = slammingBall.linear_velocity
 	
-	slammingBall.apply_central_force(Vector2(0, -weightMultiplier*weightLevel*delta))
+	slammingBall.apply_central_force(Vector2(0, weightMultiplier*weightLevel*delta))

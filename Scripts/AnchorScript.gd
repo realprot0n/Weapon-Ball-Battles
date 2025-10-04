@@ -72,4 +72,4 @@ func _process(_delta):
 
 func _physics_process(delta):
 	if canSpinWeapon:
-		anchorBase.rotate(deg_to_rad(delta*60*5*anchorCollision.direction))
+		anchorBase.rotate(deg_to_rad(delta*100*anchorCollision.direction))

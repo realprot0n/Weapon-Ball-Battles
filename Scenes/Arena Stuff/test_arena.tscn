@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://xe3st2nqvweh" path="res://Scripts/ArenaScript.gd" id="1_0frtu"]
 [ext_resource type="Script" uid="uid://xol3h5bqthki" path="res://Scripts/BounceDetectorScript.gd" id="2_f40ab"]
 [ext_resource type="AudioStream" uid="uid://d3nkse1wm7756" path="res://Sounds/Bounce.wav" id="3_wxowa"]
-[ext_resource type="PackedScene" uid="uid://cqi3hoanqhhdf" path="res://Scenes/Arena Stuff/Labels/bow_label.tscn" id="5_k3xsh"]
+[ext_resource type="PackedScene" uid="uid://dyqhup205y4kg" path="res://Scenes/Arena Stuff/Labels/sword_label.tscn" id="4_brkk4"]
 [ext_resource type="PackedScene" uid="uid://cny1c715u0l4i" path="res://Scenes/Balls/anchor.tscn" id="6_brkk4"]
-[ext_resource type="PackedScene" uid="uid://tcue8c81tb3j" path="res://Scenes/Balls/bow.tscn" id="7_amdip"]
+[ext_resource type="PackedScene" uid="uid://bv7o2araegd22" path="res://Scenes/Balls/sword.tscn" id="6_k3xsh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw8qd"]
 size = Vector2(719.344, 225.248)
@@ -102,14 +102,14 @@ scale = Vector2(1.22873, 1.22873)
 points = PackedVector2Array(358, 187, 631, 187, 631, 438, 363, 438, 363, 182)
 default_color = Color(0, 0, 0, 1)
 
-[node name="BowLabel" parent="ArenaStuff" instance=ExtResource("5_k3xsh")]
-
 [node name="Camera2D" type="Camera2D" parent="ArenaStuff"]
 position = Vector2(554, 267)
 zoom = Vector2(1.75, 1.75)
 
-[node name="Bow" parent="." instance=ExtResource("7_amdip")]
-position = Vector2(633, 195)
+[node name="SwordLabel" parent="ArenaStuff" instance=ExtResource("4_brkk4")]
 
 [node name="Anchor" parent="." instance=ExtResource("6_brkk4")]
-position = Vector2(449, 187)
+position = Vector2(449, 205)
+
+[node name="Sword" parent="." instance=ExtResource("6_k3xsh")]
+position = Vector2(641, 208)
