@@ -13,6 +13,8 @@ var canSpinWeapon: bool = true
 
 var anchorWeight = 1
 
+var potentialDamage: int = 0
+
 func _onHurtboxHit(area: WeaponHitbox) -> void:
 	# replace when i make hitbox class
 	if area == null:

@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://bf4josmsegvbe"]
+[gd_scene load_steps=16 format=3 uid="uid://bf4josmsegvbe"]
 
 [ext_resource type="Script" uid="uid://xe3st2nqvweh" path="res://Scripts/ArenaScript.gd" id="1_0frtu"]
 [ext_resource type="Script" uid="uid://xol3h5bqthki" path="res://Scripts/BounceDetectorScript.gd" id="2_f40ab"]
 [ext_resource type="AudioStream" uid="uid://d3nkse1wm7756" path="res://Sounds/Bounce.wav" id="3_wxowa"]
 [ext_resource type="PackedScene" uid="uid://dyqhup205y4kg" path="res://Scenes/Arena Stuff/Labels/sword_label.tscn" id="4_brkk4"]
+[ext_resource type="PackedScene" uid="uid://bcl65g2mec1hw" path="res://Scenes/Arena Stuff/Labels/anchor_label.tscn" id="5_k3xsh"]
 [ext_resource type="PackedScene" uid="uid://cny1c715u0l4i" path="res://Scenes/Balls/anchor.tscn" id="6_brkk4"]
 [ext_resource type="PackedScene" uid="uid://bv7o2araegd22" path="res://Scenes/Balls/sword.tscn" id="6_k3xsh"]
 
@@ -107,6 +108,10 @@ position = Vector2(554, 267)
 zoom = Vector2(1.75, 1.75)
 
 [node name="SwordLabel" parent="ArenaStuff" instance=ExtResource("4_brkk4")]
+
+[node name="AnchorLabel" parent="ArenaStuff" instance=ExtResource("5_k3xsh")]
+offset_left = 383.0
+offset_right = 423.0
 
 [node name="Anchor" parent="." instance=ExtResource("6_brkk4")]
 position = Vector2(449, 205)

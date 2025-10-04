@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcl65g2mec1hw"]
+
+[ext_resource type="Script" uid="uid://51tfjqbs2tdk" path="res://Scripts/anchorLabel.gd" id="1_ea283"]
+
+[node name="AnchorLabel" type="Label"]
+self_modulate = Color(1, 0.392157, 0.384314, 1)
+texture_filter = 2
+offset_left = 548.0
+offset_top = 402.0
+offset_right = 588.0
+offset_bottom = 425.0
+scale = Vector2(2, 2)
+script = ExtResource("1_ea283")

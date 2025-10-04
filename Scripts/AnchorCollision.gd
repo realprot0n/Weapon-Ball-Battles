@@ -33,6 +33,7 @@ func _on_hit_hurtbox(area: Hurtbox):
 	slammingAnchorToAdd.weightLevel = ball.anchorWeight
 	slammingAnchorToAdd.slammingBall = area.owner
 	slammingAnchorToAdd.slamPlayer = $"../../AnchorSlamStream"
+	slammingAnchorToAdd.anchorBall = ball
 	slammingAnchorBase.add_child(slammingAnchorToAdd)
 	
 	ball.anchorWeight += 1
